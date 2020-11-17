@@ -21,11 +21,6 @@ const App = () => {
 
   useEffect(() => {
     getEntries();
-    //because its a async and we can put 'async' in useEffect, we can do in a iif and invoke ()
-    // (async () => {
-    //   const logEntries = await listLogEntries();
-    //   setLogEntries(logEntries)
-    // })();
   }, []);
   
   return (
