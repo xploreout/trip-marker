@@ -38,9 +38,10 @@ mongoose.connection.on('...connected', function(){
 
 app.get('/', (req, res) => {
   res.json({
-    message: 'Hello World',
+    message: 'Hello World..',
   })
 });
+
 
 app.use('/api/logs', logs) //when route is ../api/logs --> will go to logs.js
 

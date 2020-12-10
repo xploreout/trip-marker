@@ -3,16 +3,65 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-    overflow: hidden;
+  overflow: hidden;
+  color: rgb(70, 70, 67) !important;
 }
 
 .marker-icon img {
   width: 20px;
   height: 20px;
-background-color: brown;
 }
 
 .marker {
+  /* fill: #c84103;  */
   transform: translate(-50%, -100%);
 }
 
+.popup {
+  max-width: 300px;
+  margin: 0;
+  padding: 0;
+}
+
+.popup img {
+  height: 100px;
+  width: auto;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+.entry-form input,
+.entry-form textarea {
+  margin: 0.1rem 0;
+  padding: 0 0.1rem;
+  display: block;
+  width: 98%;
+  font-size: 1rem;
+}
+
+.entry-form label {
+  color: white;
+  font-size: 1rem;
+}
+.entry-form input,
+.entry-form textarea {
+  background: rgb(241, 240, 233);
+  border: none;
+  color: rgb(70, 70, 67);
+}
+
+.entry-form button {
+  background-color: rgb(151, 154, 151) !important;
+  border: none;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: white;
+  border-radius: 5px;
+}
+
+.mapboxgl-popup-content {
+  /* background-color: rgb(179, 155, 177) !important; */
+  /* background-color: rgb(194, 188, 188) !important; */
+  background: lightgray !important;
+}
