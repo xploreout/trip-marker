@@ -9,9 +9,6 @@ const mongoose = require('mongoose')
 
 const middleware = require('./middlewares')
 const logs = require('./api/logs')
-
-// DATABASE_URL=mongodb+srv://tan123:tan123@cluster0.6uvtn.mongodb.net/travel-log?retryWrites=true&w=majority
-// console.log('dotenv is ', dotenv)
     
 const app = express()
 
