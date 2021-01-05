@@ -31,4 +31,16 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+router.delete('/:log_id', async (req,res, next) => {
+   try {
+     await LogEntry.findByIdAndRemove({_id: req.params.log_id});
+     return res.json( `Log entry with id: ${req.params.log_id} is removed`)
+   } catch (error) {
+     console.log(error.message);
+     return res.status(500).json({ msg: 'Server Error' });
+   } 
+  
+
+} )
+
 module.exports = router;
