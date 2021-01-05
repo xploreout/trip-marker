@@ -13,4 +13,14 @@ export async function createLogEntry (entry) {
     {'content-type': 'application/json'},
     body: JSON.stringify(entry)
   });
+
+  return response.json();
 }
+
+export async function removeEntry (id) {
+  const response = await fetch(`${API_URL}/api/logs/${id}`, {
+    method: 'DELETE',
+  });
+  return response.json();
+}
+

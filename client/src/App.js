@@ -2,9 +2,10 @@ import * as React from 'react';
 import { useState, useEffect} from 'react';
    
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
-import { listLogEntries  } from './API';
+import { listLogEntries, removeEntry  } from './API';
 import LogEntryForm from './LogEntryForm'
 
+// <i class="fas fa-ellipsis-v"/>
 const App = () => {
   const [viewport, setViewport] = useState({
     latitude: 36.1667192,
@@ -24,7 +25,20 @@ const App = () => {
   };
 
   useEffect(() => {
+    const listener = e => {
+      if (e.key === "Escape") {
+        setShowPopup({});
+      }
+    }
+    window.addEventListener("keydown", listener )
+    
     getEntries();
+     
+    //when App component is unmounted, cleanup this
+    return () => {
+      window.removeEventListener("keydown", listener)
+    }
+      
   }, []);
 
   const showAddMarkerPopup = event => {
@@ -34,26 +48,38 @@ const App = () => {
       longitude
     })
   }
+
+  //  <i class="fal fa-ellipsis-v"></i> 
+  const removeMarker = (id) => {
+    removeEntry(id);
+    setShowPopup({});
+    getEntries();
+  }
+  
+  const viewBlog = id => {
+    console.log(`viewing blog..${id}`)
+  }
   
   return (
     <ReactMapGL
-      {...viewport}
-      mapStyle="mapbox://styles/xploreout/ckhwdp1lo0m5j1aobc3q9l2ey"
+    {...viewport}
+    mapStyle="mapbox://styles/xploreout/ckhwdp1lo0m5j1aobc3q9l2ey"
       mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-      onViewportChange={nextViewport => setViewport(nextViewport)}
+      onViewportChange={newViewport => setViewport(newViewport)}
       onDblClick={showAddMarkerPopup}
     > 
     { 
       logEntries.map(log => 
        {
        return (
-       <React.Fragment key={log._id}>
+        <React.Fragment key={log._id}>
             <Marker 
               latitude={log.latitude}
               longitude={log.longitude}
             >
           <div 
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault();
               setShowPopup({[log._id]: true})
             }}>
             <svg
@@ -84,12 +110,19 @@ const App = () => {
               onClose={() => setShowPopup({})}
               anchor="top" >
                 <div className='popup'>
+                  <div onClick={(e)=>{  e.preventDefault();removeMarker(log._id) } }>
+                
+                  <button>Remove log</button>
+                </div>
+                <div>
+                  <button onClick={(e)=>{  e.preventDefault(); viewBlog(log._id) } }>View Blog</button>
+                </div>
                   <h5>{log.title}</h5>
                   <p>{log.description}</p>
                   <small>Visited on: {new Date(log.visitDate).toLocaleDateString()}</small>
                   {log.image && <img src={log.image} alt={log.title}/>}
                 </div>
-            </Popup>
+            </Popup> 
           ) : null
         }
       </React.Fragment>)
@@ -135,6 +168,7 @@ const App = () => {
                 getEntries();
               }}
               marker={addMarkerLocation}/>
+              
             </div>
         </Popup>
         </>
