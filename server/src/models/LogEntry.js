@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const requiredString = {
   type: String,
-  required: true
+  required: true,
 }
 const requiredNumber = {
   type: Number,
