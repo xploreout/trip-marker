@@ -4,6 +4,7 @@ import { useState, useEffect} from 'react';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import { listLogEntries, removeEntry  } from './API';
 import LogEntryForm from './LogEntryForm'
+import ViewBlog from './ViewBlog'
 
 // <i class="fas fa-ellipsis-v"/>
 const App = () => {
@@ -58,6 +59,8 @@ const App = () => {
   
   const viewBlog = id => {
     console.log(`viewing blog..${id}`)
+    return <ViewBlog />
+
   }
   
   return (
