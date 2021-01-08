@@ -8,7 +8,6 @@ router.get('/', async (req, res, next) => {
     const logEntries = await LogEntry.find();
     res.json(logEntries);
   } catch (error) {
-    console.log(error.name);
     if (error.name === 'ValidationError'){
       res.status(ValidationError);
     }
@@ -37,8 +36,6 @@ router.delete('/:log_id', async (req,res, next) => {
      console.log(error.message);
      return res.status(500).json({ msg: 'Server Error' });
    } 
-  
-
 } )
 
 module.exports = router;
