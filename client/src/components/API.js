@@ -26,14 +26,11 @@ export async function removeEntry (id) {
 
 export async function userLogin(data) {
 
-  console.log('---api userLogin')
-  console.log(data)
   const response = await fetch(`${API_URL}/api/user/login`, {
     method: 'POST',
     header: {'content-type': 'application/json'},
     body: JSON.stringify(data)
   })
-  console.log(response)
   return response.json();
 }
 

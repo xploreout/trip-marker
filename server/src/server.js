@@ -19,7 +19,7 @@ mongoose.connect(
   { useNewUrlParser: true, 
     useUnifiedTopology: true, 
     useFindAndModify: false},
-    () => console.log('connected to mongodb...really')
+    () => console.log('connected to mongodb...')
   );
 mongoose.connection.on('...connected', function(){  
     console.log("Mongoose default connection is open to ", process.env.DATABASE_URL);

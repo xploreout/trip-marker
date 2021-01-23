@@ -24,8 +24,6 @@ router.post('/register', async (req, res) => {
 
 router.post('/login', async (req,res) => {
   try {
-    console.log('inside login')
-    console.log(req)
     const validatedResult = await authLogin.validateAsync(req.body)
     
     const user = await User.findOne({email: validatedResult.email })

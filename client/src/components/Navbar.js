@@ -28,7 +28,6 @@ const Navbar = (props) => {
         className='ionicons icon ion-ios-menu'
         onClick={() => {
           setMenuActive(!menuActive);
-          console.log('here====')
           setTimeout(() => {
             setMenuActive(false);
           }, 5000);
