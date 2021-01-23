@@ -1,10 +1,15 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { userLogin } from './API'
+import { userRegister } from './API'
 
 const Login = (props) => {
   const { handleSubmit, register } = useForm();
 
-  const onSubmit = (formData) => {
+  const onSubmit = async (formData) => {
+    const res = await userLogin(formData)
+    console.log('res...,', res)
     alert(JSON.stringify(formData))
   }
 
@@ -23,6 +28,11 @@ const Login = (props) => {
         </div>
         <button  type="submit" className='btn btn-small'>Submit</button>
       </form>
+        <div className='card-content auth-div'>
+          <Link to='/Register'>
+            Register as new user
+          </Link>
+        </div>
       </center>
     </section>
    )
