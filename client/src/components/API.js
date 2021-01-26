@@ -24,3 +24,20 @@ export async function removeEntry (id) {
   return response.json();
 }
 
+export async function userLogin(data) {
+
+  const response = await fetch(`${API_URL}/api/user/login`, {
+    method: 'POST',
+    header: {'content-type': 'application/json'},
+    body: JSON.stringify(data)
+  })
+  return response.json();
+}
+
+export async function userRegister (data) {
+  const response = await fetch(`${API_URL}/api/user/register`, {
+    method: 'POST',
+    header: {'content-type': 'application/json'},
+    body: JSON.stringify(data)
+  })
+}

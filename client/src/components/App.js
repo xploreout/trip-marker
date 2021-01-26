@@ -58,7 +58,6 @@ const App = () => {
   }
   
   const viewBlog = id => {
-    console.log(`viewing blog..${id}`)
     return <ViewBlog />
 
   }
