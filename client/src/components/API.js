@@ -25,10 +25,9 @@ export async function removeEntry (id) {
 }
 
 export async function userLogin(data) {
-
   const response = await fetch(`${API_URL}/api/user/login`, {
     method: 'POST',
-    header: {'content-type': 'application/json'},
+    headers: {'content-type': 'application/json'},
     body: JSON.stringify(data)
   })
   return response.json();

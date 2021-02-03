@@ -23,6 +23,7 @@ router.post('/register', async (req, res) => {
 })
 
 router.post('/login', async (req,res) => {
+  
   try {
     const validatedResult = await authLogin.validateAsync(req.body)
     
