@@ -13,38 +13,36 @@ const Navbar = (props) => {
 
   return (
     <>
-      <nav>
-        <div className='navbar'>
-          <Link to='/' className='navbar-logo'>
-            ilogo
-            <FaBeer />
-          </Link>
-          <div className='menu-icon' onClick={handleClick}>
-            {click ? <FaTimes /> : <FaBars />}
-          </div>
-          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-            <li className='nav-item' onClick={closeMobileMenu}>
-              <Link className='nav-links' to='/Map'>
-                Map
-              </Link>
-            </li>
-            <li className='nav-item' onClick={closeMobileMenu}>
-              <Link className='nav-links' to='/BlogList'>
-                Blog
-              </Link>
-            </li>
-            <li className='nav-item' onClick={closeMobileMenu}>
-              <Link className='nav-links' to='/contact-us'>
-                Contact Us
-              </Link>
-            </li>
-            <li className='nav-item' onClick={closeMobileMenu}>
-              <Link className='nav-links' to='/Login'>
-                Login
-              </Link>
-            </li>
-          </ul>
+      <nav className='navbar'>
+        <Link to='/' className='navbar-logo'>
+          ilogo
+          <FaBeer />
+        </Link>
+        <div className='menu-icon' onClick={handleClick}>
+          {click ? <FaTimes /> : <FaBars />}
         </div>
+        <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+          <li className='nav-item' onClick={closeMobileMenu}>
+            <Link className='nav-links' to='/Map'>
+              Map
+            </Link>
+          </li>
+          <li className='nav-item' onClick={closeMobileMenu}>
+            <Link className='nav-links' to='/BlogList'>
+              Blog
+            </Link>
+          </li>
+          <li className='nav-item' onClick={closeMobileMenu}>
+            <Link className='nav-links' to='/contact-us'>
+              Contact Us
+            </Link>
+          </li>
+          <li className='nav-item' onClick={closeMobileMenu}>
+            <Link className='nav-links' to='/Login'>
+              Login
+            </Link>
+          </li>
+        </ul>
       </nav>
     </>
   );

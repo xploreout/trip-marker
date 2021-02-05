@@ -1,11 +1,11 @@
 .navbar {
   background: teal;
-  height: 50px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 0.8rem;
-  padding-top: 20px;
+  padding-top: 1rem;
 }
 
 .navbar-logo {
@@ -43,7 +43,7 @@
 }
 
 .nav-links:hover {
-  // transition: all 0.1s ease-in;
+  transition: all 0.3s ease-in;
   padding: 10px;
 }
 
@@ -96,7 +96,7 @@
   }
 
   .nav-links:hover {
-    background-color: #aacdf1;
+    // background-color: #aacdf1;
     border-radius: 0;
     padding: 10px 0px;
   }
@@ -106,7 +106,7 @@
     top: 0;
     left: 0;
     padding-top: 0;
-    transform: translate(30%, 10%);
+    transform: translate(40%, 20%);
   }
 
   .menu-icon {
@@ -116,7 +116,7 @@
     right: 0;
     color: #fff;
     transform: translate(-90%, 10%);
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     cursor: pointer;
   }
 
