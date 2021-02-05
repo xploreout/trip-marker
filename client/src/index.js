@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App';
 import AppHome from './components/AppHome'
 
 import './assets/scss/base.scss';

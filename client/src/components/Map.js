@@ -7,7 +7,7 @@ import LogEntryForm from './LogEntryForm'
 import ViewBlog from './ViewBlog'
 
 // <i class="fas fa-ellipsis-v"/>
-const App = () => {
+const Map = () => {
   const [viewport, setViewport] = useState({
     latitude: 36.1667192,
     longitude: -89.4111423,
@@ -181,4 +181,4 @@ const App = () => {
 }
  
 
-export default App;
+export default Map;

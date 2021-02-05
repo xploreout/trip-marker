@@ -1,41 +1,53 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-
-/**
-* @author
-* @function Navbar
-**/
+import { FaBars, FaBeer, FaTimes } from 'react-icons/fa';
 
 const Navbar = (props) => {
   const [menuActive, setMenuActive] = useState(false);
 
-  return(
-    <nav>
-      
-    <div className="nav-wrapper" >
-      <div className={`${menuActive && 'active'}`}>
-      <a href="#" className="brand-logo">Logo</a>
-      <ul id="nav-mobile" className="right hide-on-med-and-down">
-        <li><Link to="/App">App</Link></li>
-        <li><Link to="/BlogList">Blog</Link></li>
-        <li><Link to="/contact-us">Contact Us</Link></li>
-        <li><Link to="/Login">Login</Link></li>
-      </ul>
-      </div>
-    </div>
-    <i
-        className='ionicons icon ion-ios-menu'
-        onClick={() => {
-          setMenuActive(!menuActive);
-          setTimeout(() => {
-            setMenuActive(false);
-          }, 5000);
-        }}
-      />
-  </nav>
-   )
+  const [click, setClick] = useState(false);
+  const [dropdown, setDropdown] = useState(false);
 
- }
+  const handleClick = () => setClick(!click);
+  const closeMobileMenu = () => setClick(false);
 
-export default Navbar
+  return (
+    <>
+      <nav>
+        <div className='navbar'>
+          <Link to='/' className='navbar-logo'>
+            ilogo
+            <FaBeer />
+          </Link>
+          <div className='menu-icon' onClick={handleClick}>
+            {click ? <FaTimes /> : <FaBars />}
+          </div>
+          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+            <li className='nav-item' onClick={closeMobileMenu}>
+              <Link className='nav-links' to='/Map'>
+                Map
+              </Link>
+            </li>
+            <li className='nav-item' onClick={closeMobileMenu}>
+              <Link className='nav-links' to='/BlogList'>
+                Blog
+              </Link>
+            </li>
+            <li className='nav-item' onClick={closeMobileMenu}>
+              <Link className='nav-links' to='/contact-us'>
+                Contact Us
+              </Link>
+            </li>
+            <li className='nav-item' onClick={closeMobileMenu}>
+              <Link className='nav-links' to='/Login'>
+                Login
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </>
+  );
+};
+
+export default Navbar;
