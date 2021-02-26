@@ -1,45 +1,51 @@
 const router = require('express').Router();
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
 const User = require('../models/User');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
-const {authSchema, authLogin} = require('../helper/authSchema');
+const { authSchema, authLogin } = require('../helper/authSchema');
 
 router.post('/register', async (req, res) => {
   try {
     const validatedResult = await authSchema.validateAsync(req.body);
-    
-    const emailExist = await User.findOne({email: validatedResult.email});
+
+    const emailExist = await User.findOne({ email: validatedResult.email });
     if (emailExist) return res.status(400).send('Email already exists');
 
     const user = new User(validatedResult);
-    const savedUser =  await user.save();
-    res.send(savedUser)
-  } catch (error){ 
-    if(error.isJoi === true) 
-      return res.status(422).send(error.details[0].message)
+    const savedUser = await user.save();
+    res.send(savedUser);
+  } catch (error) {
+    if (error.isJoi === true)
+      return res.status(422).send(error.details[0].message);
     res.status(400).send(error);
   }
-})
+});
 
-router.post('/login', async (req,res) => {
+router.post('/login', async (req, res) => {
+  console.log('backed login...');
   try {
-    const validatedResult = await authLogin.validateAsync(req.body)
-    
-    const user = await User.findOne({email: validatedResult.email })
- 
+    const validatedResult = await authLogin.validateAsync(req.body);
+
+    const user = await User.findOne({ email: validatedResult.email });
+    console.log('findOne user..', user);
+
     if (!user) return res.status(404).send('No user found');
 
-    const validUser = await bcrypt.compare(req.body.password, user.password)
-    if (!validUser) return res.send('Invalid login')
+    const validUser = await bcrypt.compare(req.body.password, user.password);
+    if (!validUser) return res.send('Invalid login');
 
-    const token=jwt.sign({_id: user._id}, process.env.TOKEN_SECRET);
-    res.header('auth-token', token).send('Login')
+    const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
+      expiresIn: 300,
+    });
+    req.session.user = validUser;
+    // res.json({auth: true, token: token, result: validUser})
+    res.header('auth-token', token).send('Login');
   } catch (error) {
-    if(error.isJoi === true) 
-      return res.status(422).send(error.details[0].message)
+    if (error.isJoi === true)
+      return res.status(422).send(error.details[0].message);
     res.status(400).send(error);
   }
-})
+});
 
-module.exports = router
+module.exports = router;

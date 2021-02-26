@@ -11,6 +11,8 @@ const logs = require('./api/logs')
 const authRoute = require('./api/auth')
 
 const app = express()
+app.use(express.json()); 
+//middleware now we can send post request(bodyparser) 
 
 require('dotenv').config();
 
@@ -26,8 +28,6 @@ mongoose.connection.on('...connected', function(){
  });
 
 //middleware
-app.use(express.json()); //now we can send post request(bodyparser) 
-
 app.use(morgan('common'));
 app.use(helmet())
 app.use(cors({
