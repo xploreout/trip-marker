@@ -27,20 +27,17 @@ export async function removeEntry(id) {
 export function userLogin(data) {
   const { email, password } = data;
 
-  console.log(email, password, 'from data...');
-  const response = axios
+  axios
     .post(`${API_URL}/api/user/login`, {
-      email: email,
-      password: password,
+      email,
+      password,
     })
     .then((res) => {
-      console.log('response after login api', res);
-      alert('login success');
       console.log('res is ', res);
       return res;
     })
     .catch((error) => {
-      console.log('ERRRR Login:: ', error);
+      console.log('Server erroe', error.response);
     });
 }
 
@@ -57,6 +54,6 @@ export const userRegister = (data) => {
       return res;
     })
     .catch((error) => {
-      console.log('ERRRR:: ', error);
+      console.log('ERRRR:: ', error.response);
     });
 };

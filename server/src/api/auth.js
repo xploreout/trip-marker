@@ -23,24 +23,25 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  console.log('backed login...');
   try {
     const validatedResult = await authLogin.validateAsync(req.body);
 
     const user = await User.findOne({ email: validatedResult.email });
-    console.log('findOne user..', user);
 
     if (!user) return res.status(404).send('No user found');
 
     const validUser = await bcrypt.compare(req.body.password, user.password);
     if (!validUser) return res.send('Invalid login');
 
-    const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
-      expiresIn: 300,
-    });
-    req.session.user = validUser;
-    // res.json({auth: true, token: token, result: validUser})
-    res.header('auth-token', token).send('Login');
+    // const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
+      // expiresIn: 300,
+    // });
+    
+    const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+
+    res.setHeader('auth-token', token);
+    res.json({ auth: true, token: token, result: validUser });
+    return res.send('Login');
   } catch (error) {
     if (error.isJoi === true)
       return res.status(422).send(error.details[0].message);
