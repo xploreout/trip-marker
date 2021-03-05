@@ -14,7 +14,8 @@ router.post('/register', async (req, res) => {
 
     const user = new User(validatedResult);
     const savedUser = await user.save();
-    res.send(savedUser);
+    // res.send(savedUser);
+    return res.json(200)
   } catch (error) {
     if (error.isJoi === true)
       return res.status(422).send(error.details[0].message);
@@ -40,8 +41,9 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
 
     res.setHeader('auth-token', token);
-    res.json({ auth: true, token: token, result: validUser });
-    return res.send('Login');
+    return res.status(200).json({ auth: true, token: token, result: validUser });
+    // res.send('Login');
+    return res.redirect('/');
   } catch (error) {
     if (error.isJoi === true)
       return res.status(422).send(error.details[0].message);

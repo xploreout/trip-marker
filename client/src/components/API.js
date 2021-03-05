@@ -33,7 +33,9 @@ export function userLogin(data) {
       password,
     })
     .then((res) => {
-      console.log('res is ', res);
+      console.log(res);
+      if (res.status === 200) {
+      }
       return res;
     })
     .catch((error) => {
@@ -50,10 +52,10 @@ export const userRegister = (data) => {
       password,
     })
     .then((res) => {
-      console.log('response try api', res);
+      console.log(res);
       return res;
     })
     .catch((error) => {
-      console.log('ERRRR:: ', error.response);
+      console.log('ERROR:: ', error.response);
     });
 };
