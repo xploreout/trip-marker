@@ -28,7 +28,7 @@ const Navbar = (props) => {
             </Link>
           </li>
           <li className='nav-item' onClick={closeMobileMenu}>
-            <Link className='nav-links' to='/BlogList'>
+            <Link className='nav-links' to='/blog'>
               Blog
             </Link>
           </li>
@@ -38,7 +38,7 @@ const Navbar = (props) => {
             </Link>
           </li>
           <li className='nav-item' onClick={closeMobileMenu}>
-            <Link className='nav-links' to='/Register'>
+            <Link className='nav-links' to='/register-login'>
               Login
             </Link>
           </li>
