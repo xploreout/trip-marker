@@ -2,11 +2,11 @@ import react, { useContext } from 'react';
 import { UserContext } from './context/UserContext';
 
 const ViewBlog = () => {
-  const msg = useContext(UserContext);
+  const { userAuth, setUserAuth} = useContext(UserContext);
   return (
     <>
-      <h4>this is viewBlog</h4>
-      <div>{msg}</div>
+      <h4>component viewBlog</h4>
+      <div>{userAuth}</div>
     </>
   );
 };

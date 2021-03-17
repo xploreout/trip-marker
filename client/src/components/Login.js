@@ -1,7 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Card, Button, Form, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { userLogin } from './API';
+import { useContext } from './context/UserContext'
 
 const Login = () => {
   const emailRef = useRef('');
