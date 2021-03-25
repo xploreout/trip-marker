@@ -6,6 +6,7 @@ import { userRegister } from './API';
 const Register = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
+  const usernameRef = useRef();
   const confirmPasswordRef = useRef();
 
   async function handleSubmit(e) {
@@ -23,6 +24,8 @@ const Register = () => {
       const response = await userRegister({
         email: emailRef.current.value,
         password: passwordRef.current.value,
+        username: usernameRef.current.value,
+        role: 'user'
       });
       return response;
     }
@@ -39,8 +42,16 @@ const Register = () => {
             <Card.Body>
               <h3 className='text-center mt-1 mb-3'>Sign up here</h3>
               <Form>
+                <Form.Group id='username'>
+                  <Form.Control
+                    type='username'
+                    ref={usernameRef}
+                    required
+                    placeholder='Username'
+                    name='username'
+                  />
+                </Form.Group>
                 <Form.Group id='email'>
-                  {/* <Form.Label>Email</Form.Label> */}
                   <Form.Control
                     type='email'
                     ref={emailRef}

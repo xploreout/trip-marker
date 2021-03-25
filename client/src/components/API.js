@@ -44,12 +44,15 @@ export function userLogin(data) {
 }
 
 export const userRegister = (data) => {
-  const { email, password } = data;
+  const { email, password, username } = data;
+  const role = 'user'
 
   axios
     .post(`${API_URL}/api/user/register`, {
       email,
       password,
+      username,
+      role
     })
     .then((res) => {
       console.log(res);
