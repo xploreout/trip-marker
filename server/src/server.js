@@ -6,29 +6,28 @@ const helmet = require('helmet');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
-const middleware = require('./middlewares');
+const handler = require('./middleware/handler');
 const logs = require('./api/logs');
 const authRoute = require('./api/auth');
+const postRoute = require('./api/posts');
+
 const cookieParser = require('cookie-parser');
+const passport = require('passport')
 
 const app = express();
 app.use(express.json());
 //middleware now we can send post request(bodyparser)
 
 require('dotenv').config();
+require('./api/config/passport');
 
 mongoose.connect(
   process.env.DATABASE_URL,
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
   () => console.log('connected to mongodb...')
 );
-mongoose.connection.on('...connected', function () {
-  console.log(
-    'Mongoose default connection is open to ',
-    process.env.DATABASE_URL
-  );
-});
 
+const PORT = process.env.PORT || 5000;
 //middleware
 app.use(morgan('common'));
 app.use(helmet());
@@ -38,6 +37,7 @@ app.use(
   })
 );
 app.use(cookieParser());
+app.use(passport.initialize())
 
 //route middleware
 app.get('/', (req, res) => {
@@ -45,12 +45,14 @@ app.get('/', (req, res) => {
     message: 'Hello World..',
   });
 });
-app.use('/api/logs', logs); //when route is ../api/logs --> will go to logs.js
+
+app.use('/api/logs', logs); 
 app.use('/api/user', authRoute);
+app.use('/api/posts', postRoute);
 
 //put this the last=== check if not found
-app.use(middleware.notFound);
-app.use(middleware.errorHandler);
+app.use(handler.notFound);
+app.use(handler.errorHandler);
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => console.log(`Listening to port ${port}`));
+
+app.listen(PORT, () => console.log(`Listening to port ${PORT}`));
