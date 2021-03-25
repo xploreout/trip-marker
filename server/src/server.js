@@ -11,15 +11,11 @@ const logs = require('./api/logs');
 const authRoute = require('./api/auth');
 const postRoute = require('./api/posts');
 
-const cookieParser = require('cookie-parser');
-const passport = require('passport')
-
 const app = express();
 app.use(express.json());
 //middleware now we can send post request(bodyparser)
 
 require('dotenv').config();
-require('./api/config/passport');
 
 mongoose.connect(
   process.env.DATABASE_URL,
@@ -36,8 +32,6 @@ app.use(
     origin: process.env.CORS_ORIGIN,
   })
 );
-app.use(cookieParser());
-app.use(passport.initialize())
 
 //route middleware
 app.get('/', (req, res) => {

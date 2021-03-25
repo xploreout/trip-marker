@@ -68,7 +68,7 @@ const Login = () => {
           </Card>
           <p className='small w-70 text-center'>
             Don't have an account?
-            <Link to='/Register'> Sign up </Link>
+            <Link to='/Register-login'> Sign up </Link>
             here
           </p>
         </div>
